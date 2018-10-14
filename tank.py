@@ -59,7 +59,7 @@ class TanksMain:
         # Range of the Impact for x - size_factor to x + size_factor.
         temp_range = np.arange(1, size_factor * 2, 1, dtype = np.float64)
         # Cosinus values for impact ~0 at borders and ~-2 at the center.
-        temp_cos = np.cos(temp_range / size / width_factor * np.pi)
+        temp_cos = np.cos(temp_range / size / self._IMPACT_WIDTH_FACTOR * np.pi)
         # Cosinus values multiplied by the factor for actual impact depth.
         impact = ((temp_cos - 1) * size / 2).astype(dtype = np.int32)
 
@@ -67,7 +67,7 @@ class TanksMain:
         start = max(x - size_factor + 1, 0)
         end = min(x + size_factor, self.__width)
         #self.impact.append([start, end])
-        self.terrain[max(start:end] += impact[0:-1]
+        self.terrain[start:end] += impact
 
     def relative_terrain(self, size):
         """

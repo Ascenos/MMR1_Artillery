@@ -150,7 +150,7 @@ class Engine:
                 value = next(behavior)
             except StopIteration:
                 # Coroutine was stopped normaly, continue
-                self.StopCoroutine(behavior)
+                self.stop_behavior(behavior)
         # Let the renderer draw the Objects that are visible
         # TODO add multiple renderers or additional capabilities
         self.renderer.render(self._visibles())

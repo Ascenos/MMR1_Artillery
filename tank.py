@@ -1,6 +1,8 @@
 import numpy as np
 from legendrePolynom import legendre_polynom
 
+from gameObjects.tank import Tank
+
 from tankUtility import *
 
 class TanksMain:
@@ -41,7 +43,9 @@ class TanksMain:
         self.__terrain = y_values.astype(dtype = np.int32)
 
     def generate_tanks(self):
-        pass
+        self._player_tanks = []
+        for _ in range(self.__players):
+
 
     def generate_impact(self, x, size):
         """
@@ -50,7 +54,7 @@ class TanksMain:
 
         Input:
             x    : int
-            size : int
+            size : int  
 
         Returns:
             None

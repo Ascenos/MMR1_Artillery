@@ -1,14 +1,9 @@
 from .game_object import GameObject
 from .input import input_provider
+from .base import engine
 
 
 
 class InputObject(GameObject):
-    # TODO implement this
-
-    def pull_input(self):
-        """
-        This method will provide the object with its needed input
-        Supply your input getting routine here
-        """
-        return input_provider.get_input()
+    def get_input(self):
+        return engine.Input

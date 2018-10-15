@@ -1,4 +1,5 @@
 from .renderer import BaseRenderer
+from .input import input_provider
 
 
 
@@ -56,6 +57,15 @@ class Engine:
         self.renderer = BaseRenderer()
         self._game_objects = []
         self._game_behaviors = []
+        self._input = None
+
+    @property
+    def Input(self):
+        """
+        Provide input from input handeler. This can be used
+        for various different input methods
+        """
+        return self._input
 
     def _active_game_objects(self):
         """
@@ -132,23 +142,18 @@ class Engine:
 
 
     def update(self, *args, **kwargs):
-        # Get arguments from kwargs
-        skip_behavior = kwargs.pop('skip_behavior', False)
-        skip_render   = kwargs.pop('skip_render'  , False)
+        # TODO improve interactability of this function
+        self._input = input_provider.get_input()
 
-        # Skip behaviors if needed
-        if not skip_behavior:
-            for behavior in self._game_behaviors:
-                try:
-                    value = next(behavior)
-                except StopIteration:
-                    # Coroutine was stopped normaly, continue
-                    self.StopCoroutine(behavior)
-        # Skip renderer if needed
-        if not skip_render:
-            # Let the renderer draw the Objects that are visible
-            # TODO add multiple renderers or additional capabilities
-            self.renderer.render(self._visibles())
+        for behavior in self._game_behaviors:
+            try:
+                value = next(behavior)
+            except StopIteration:
+                # Coroutine was stopped normaly, continue
+                self.StopCoroutine(behavior)
+        # Let the renderer draw the Objects that are visible
+        # TODO add multiple renderers or additional capabilities
+        self.renderer.render(self._visibles())
 
 # Use this singleton instance in the main project
 engine = Engine()

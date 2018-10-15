@@ -6,10 +6,11 @@ class RigidObject(GameObject):
     """
     A GameObject class that does not recieve many updates.
     """
-    # TODO implement more convinience functions
-    def __init__(self):
-        super().__init__()
-        self._base()
+    def __new__(cls, *args, **kwargs):
+        rigid_object = super().__new__(cls, *args, **kwargs)
+        # Create base shape of the object
+        rigid_object._base()
+        return rigid_object
         # TODO maybe add something more
 
     def _base(self):
@@ -21,9 +22,9 @@ class RigidObject(GameObject):
         pass
 
     # TODO maybe do collision info a class
-    def collision_info(self):
+    def collision_info(self, point):
         """
-        This returns eventual collision info that can be used by other objects
+        This returns eventual collision with a point.
 
         abstractmethod
         """

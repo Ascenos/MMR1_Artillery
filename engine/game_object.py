@@ -40,6 +40,12 @@ class GameObject:
         """
         self._stop_all_behaviors()
 
+    def render(self, frame):
+        """
+        Renders the picture on the passed frame.
+        """
+        pass
+
     # Helper function to be able to wait (non blocking)
     # Use this when writing coroutines to change
     def wait(seconds):

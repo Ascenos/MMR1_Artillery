@@ -4,6 +4,9 @@ from .input import input_provider
 
 
 class InputObject(GameObject):
+    def __init__(self):
+        super().__init__()
+    
     # TODO implement this
 
     def pull_input(self):

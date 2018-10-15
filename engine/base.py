@@ -4,19 +4,12 @@ from .renderer import BaseRenderer
 
 class GameBehavior:
     # TODO add *args instead if this (?)
-    def __init__(self, function, root=None):
-        if root:
-            try:
-                self._iter_function = iter(function(root))
-            # TODO make explicit error catch
-            except:
-                raise ValueError('This cannot be a Behavior.') from None
-        else:
-            try:
-                self._iter_function = iter(function())
-            # TODO make explicit error catch
-            except:
-                raise ValueError('This cannot be a Behavior.') from None
+    def __init__(self, function, _temp_fix=None):
+        try:
+            self._iter_function = iter(function())
+        # TODO make explicit error catch
+        except:
+            raise ValueError('This cannot be a Behavior.') from None
         self._base_function = function
 
     @property

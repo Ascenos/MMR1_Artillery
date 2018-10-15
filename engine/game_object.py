@@ -9,7 +9,7 @@ class GameObject:
         """
         Creates the object and adds it into the engines game_objects list
         """
-        game_object = super().__new__(cls, *args, **kwargs)
+        game_object = super().__new__(cls)
         engine.add_game_object(game_object)
         return game_object
 

@@ -1,6 +1,8 @@
 from numpy import zeros, negative, delete, prod, flipud
 from numpy.polynomial.polynomial import Polynomial
 
+
+
 def legendre_polynom(x, y):
     length = len(x)
     def legendre_part(k):

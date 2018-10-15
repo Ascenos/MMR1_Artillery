@@ -8,9 +8,10 @@ class GameBehavior:
         try:
             self._iter_function = iter(function())
         # TODO make explicit error catch
-        except:
+        except TypeError:
             raise ValueError('This cannot be a Behavior.') from None
-        self._base_function = function
+        else:
+            self._base_function = function
 
     @property
     def ID(self):

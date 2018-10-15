@@ -10,16 +10,15 @@ class GameObject:
         Creates the object and adds it into the engines game_objects list
         """
         game_object = super().__new__(cls)
+        # Activate item
+        game_object._active = True
+        # Don't set it visible though
+        game_object._visible = False
+        # Starting class has no behaviors
+        game_object._behaviors = []
+        # Add object to the engine
         engine.add_game_object(game_object)
         return game_object
-
-    def __init__(self):
-        # Activate item
-        self._active = True
-        # Don't set it visible though
-        self._visible = False
-        # Starting class has no behaviors
-        self._behaviors = []
 
     @property
     def ACTIVE(self):

@@ -14,6 +14,6 @@ from .input import input_provider
 from .renderer import BaseRenderer
 
 # Secretly import the engine
-import .base.engine as __engine
+from .base import engine as __engine
 # Alias the engine update to this one
 update = __engine.update

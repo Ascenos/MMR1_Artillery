@@ -1,10 +1,10 @@
 from .game_object import GameObject
-from input import input_provider
+from .input import input_provider
 
 
 
 class InputObject(GameObject):
-    def
+    # TODO implement this
 
     def pull_input(self):
         """

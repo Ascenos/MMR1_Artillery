@@ -3,7 +3,6 @@ from .base import engine, GameBehavior
 
 
 
-# TODO MASSIVE WORK HERE
 # Implementing game object
 class GameObject:
     def __new__(cls, *args, **kwargs):
@@ -45,7 +44,7 @@ class GameObject:
 
     def _stop_behavior(self, function):
         for behavior in self._behavior:
-            if behavior.base_function == function
+            if behavior.base_function == function:
                 engine.stop_behavior(behavior.ID)
                 self._behavior.remove(behavior)
                 return

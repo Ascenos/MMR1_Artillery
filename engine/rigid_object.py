@@ -5,8 +5,8 @@ from .game_object import GameObject
 class RigidObject(GameObject):
     """
     A GameObject class that does not recieve many updates.
-
     """
+    # TODO implement more convinience functions
     def __init__(self):
         self._base()
         # TODO maybe add something more

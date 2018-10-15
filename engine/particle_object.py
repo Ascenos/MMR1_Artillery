@@ -1,3 +1,4 @@
+from .game_object import GameObject
 # TODO implement this
 
 

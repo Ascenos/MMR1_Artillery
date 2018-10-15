@@ -19,7 +19,7 @@ class GameObject:
         self._active = True
         # Don't set it visible though
         self._visible = False
-        # Starting class has no behaviours
+        # Starting class has no behaviors
         self._behaviors = []
 
     @property
@@ -41,18 +41,18 @@ class GameObject:
     def _start_behavior(self, function):
         behavior = GameBehavior(function, self)
         self._behaviors.append(behavior)
-        engine.add_coroutine(behavior)
+        engine.start_behavior(behavior)
 
     def _stop_behavior(self, function):
         for behavior in self._behavior:
             if behavior.base_function == function
-                engine.stop_coroutine(behavior.ID)
+                engine.stop_behavior(behavior.ID)
                 self._behavior.remove(behavior)
                 return
 
     def _stop_all_behaviors(self):
         for behavior in self._behavior:
-            engine.stop_coroutine(behavior.ID)
+            engine.stop_behavior(behavior.ID)
 
     def _get_game_objects(self, strict_object_type, filter=None):
         """

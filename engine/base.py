@@ -2,14 +2,21 @@ from .renderer import BaseRenderer
 
 
 
-class GameBehaviour:
-    def __init__(self, function, root):
-        # Maybe initialize something?
-        try:
-            self._iter_function = iter(root.function())
-        # TODO make explicit error catch
-        except:
-            raise ValueError('This cannot be a Behavior.') from None
+class GameBehavior:
+    # TODO add *args instead if this (?)
+    def __init__(self, function, root=None):
+        if root:
+            try:
+                self._iter_function = iter(function(root))
+            # TODO make explicit error catch
+            except:
+                raise ValueError('This cannot be a Behavior.') from None
+        else:
+            try:
+                self._iter_function = iter(function())
+            # TODO make explicit error catch
+            except:
+                raise ValueError('This cannot be a Behavior.') from None
         self._base_function = function
 
     @property
@@ -30,6 +37,8 @@ class Engine:
 
     DON'T use this class directly. Instead use the wrappers provided in
     GameObject to interact with this thing
+
+    If need to execute code use the GameFunction.start function
     """
     __instance = None
 
@@ -84,7 +93,7 @@ class Engine:
             if isinstance(game_object, object_type)
         ]
 
-    def add_object(self, game_object):
+    def add_game_object(self, game_object):
         """
         Add a game object to the engines object list
         """
@@ -96,13 +105,14 @@ class Engine:
         """
         for game_object in self._game_objects:
             if id(game_object) == id(remove_object):
-                
+                self._game_objects.remove(game_object)
+                return
 
     def start_behavior(self, behavior):
         """
         Adds a coroutine to be run every update (maybe more frequently(?))
         """
-        self._game_routines.append(behavior)
+        self._game_behaviors.append(behavior)
 
     def stop_behavior(self, remove_id):
         """
@@ -111,7 +121,7 @@ class Engine:
         for behavior in self._game_behaviors:
             # Check if their base functions are the same
             if behavior.ID == remove_id:
-                self._coroutines.remove(behavior)
+                self._game_behaviors.remove(behavior)
                 return
 
     def stop_all_behaviors(self):
@@ -120,18 +130,27 @@ class Engine:
 
         Be sure to start the next routine in the same iteration
         """
-        self._game_routines = []
+        self._game_behaviors = []
 
 
-    def update(self):
-        # Let the renderer draw the Objects that are visible
-        self.renderer.render(self._visibles())
-        for behavior in self._game_behaviors:
-            try:
-                value = next(coroutine)
-            except StopIteration:
-                # Coroutine was stopped normaly, continue
-                self.StopCoroutine(coroutine)
+    def update(self, *args, **kwargs):
+        # Get arguments from kwargs
+        skip_behavior = kwargs.pop('skip_behavior', False)
+        skip_render   = kwargs.pop('skip_render'  , False)
+
+        # Skip behaviors if needed
+        if not skip_behavior:
+            for behavior in self._game_behaviors:
+                try:
+                    value = next(behavior)
+                except StopIteration:
+                    # Coroutine was stopped normaly, continue
+                    self.StopCoroutine(behavior)
+        # Skip renderer if needed
+        if not skip_render:
+            # Let the renderer draw the Objects that are visible
+            # TODO add multiple renderers or additional capabilities
+            self.renderer.render(self._visibles())
 
 # Use this singleton instance in the main project
 engine = Engine()

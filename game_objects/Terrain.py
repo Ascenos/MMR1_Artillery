@@ -11,3 +11,6 @@ class Terrain(RigidObject):
 
     def render_info(self):
         pass
+
+    def update_terrain.py(self):
+        pass

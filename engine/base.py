@@ -98,6 +98,8 @@ class Engine:
         Add a game object to the engines object list
         """
         self._game_objects.append(game_object)
+        # Setup for object
+        game_object.on_start()
 
     def remove_game_object(self, game_object):
         """
@@ -106,6 +108,8 @@ class Engine:
         for game_object in self._game_objects:
             if id(game_object) == id(remove_object):
                 self._game_objects.remove(game_object)
+                # Cleanup for object
+                game_object.on_end()
                 return
 
     def start_behavior(self, behavior):

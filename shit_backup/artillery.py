@@ -133,7 +133,7 @@ class Artillery(QMainWindow):
             self.logger.debug(">>Showing game menu.")
             self.pause_game()
             self.game_menu.show()
-                 
+
     def generate_game(self):
         # Logging
         self.logger.debug('Calling "generate_game"')
@@ -160,7 +160,7 @@ class Artillery(QMainWindow):
         self.game.show()
         # Das Spiel wird hier gestartet
         self.game.start()
-        
+
     def start_game(self):
         # Logging
         self.logger.debug('Calling "start_game"')
@@ -195,7 +195,7 @@ class Artillery(QMainWindow):
             #self.close()
             pass
 
-        
+
 
 class Game(QLabel):
     """
@@ -364,11 +364,11 @@ class Game(QLabel):
             self.currentPlayerNum = (self.currentPlayerNum+1) % self.playerCount
             if self.currentPlayer.inGame:
                 break
-    
+
     @property
     def currentPlayer(self):
         return self.players[self.currentPlayerNum]
-    
+
 
 if __name__ == "__main__":
     # Sets Logger to Debug
@@ -377,7 +377,7 @@ if __name__ == "__main__":
     handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
     logger.addHandler(handler)
-    
+
     app = QApplication([])                                  # Öffnen der Anwendung
     app.setWindowIcon(QIcon('assets/images/player.gif'))    # Anwendungsicon
     artillary = Artillery(resolution = (800, 450), fullscreen = False)                                 # Öffnen des Fensters

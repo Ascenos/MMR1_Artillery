@@ -29,6 +29,18 @@ class GameObject:
     def VISIBLE(self):
         return self._visible
 
+    def on_start(self):
+        """
+        Function that gets called on start.
+        """
+        pass
+
+    def on_end(self):
+        """
+        Function that gets called on destroy
+        """
+        self._stop_all_behaviors()
+
     # Helper function to be able to wait (non blocking)
     # Use this when writing coroutines to change
     def wait(seconds):
@@ -53,7 +65,7 @@ class GameObject:
         for behavior in self._behavior:
             engine.stop_behavior(behavior.ID)
 
-    def _get_game_objects(self, strict_object_type, filter=None):
+    def _search_game_objects(self, strict_object_type, filter=None):
         """
         Uses the search function to get a specific loaded game object
         """

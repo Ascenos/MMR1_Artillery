@@ -25,7 +25,6 @@ Wir werden ein super tolles Spiel programmieren!
 
 - GameFunction
 > These are used for independent functions from game objects.
-> Will always be processed first (TODO)
 
     - mainGameFunction
     - some other stuff

@@ -4,11 +4,11 @@ from .base import engine, GameBehavior
 
 
 class GameFunction:
-    def __init__(self, function):
-        self._function = function
+    def __init__(self):
+        self._function = self.function
         self._destroyed = False
+        self._running = False
         self.start()
-        self._running = True
 
     def wait(seconds):
         start_time = time()
@@ -24,23 +24,28 @@ class GameFunction:
 
     # Calls for function management
     def start(self):
+        if self._destroyed:
+            return
         if self._running:
             return
-        if not self._destroyed:
-            self._behavior = GameBehavior(self._function)
-            engine.start_behavior(self._behavior)
+        self._behavior = GameBehavior(self._function)
+        engine.start_behavior(self._behavior)
+        self._running = True
 
     def pause(self):
+        if self._destroyed:
+            return
         if not self._running:
             return
-        if not self._destroyed:
-            engine.stop_behavior(self._behavior.ID)
+        engine.stop_behavior(self._behavior.ID)
+        self._running = False
 
     def stop(self):
+        if self._destroyed:
+            return
         if not self._running:
             return
-        if not self._destroyed:
-            engine.stop_behavior(self._behavior.ID)
-            self._function = None
-            self._behavior = None
-            self._destroyed = True
+        engine.stop_behavior(self._behavior.ID)
+        self._function = None
+        self._behavior = None
+        self._destroyed = True

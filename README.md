@@ -42,5 +42,5 @@ create a Instance to add the function to the main engine loop. This allows
 for some additional features, like cerating GameObjects as well as starting
 other GameFunctions and stuff.
 
-You can either use the `base.engine.loop` to get a self managed infinite loop
-(TODO), or you can manually call the update function
+You can either use the `engine.managed.loop` to get a self managed infinite
+loop, or you can manually call the update function

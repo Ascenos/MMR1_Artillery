@@ -17,3 +17,6 @@ from .renderer import BaseRenderer
 from .base import engine as __engine
 # Alias the engine update to this one
 update = __engine.update
+
+# Import managed engine handeler
+from .managed import *

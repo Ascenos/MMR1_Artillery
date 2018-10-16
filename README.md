@@ -44,3 +44,16 @@ other GameFunctions and stuff.
 
 You can either use the `engine.managed.loop` to get a self managed infinite
 loop, or you can manually call the update function
+
+### Resolution considerations
+Optimization resolutions
+##### 16x9:
+    - WXGA is included in QHD
+    - QHD:   2560x1440, 320*8x180*8
+    - FHD:   1920x1080, 320*6x180*6
+    - HD+:   1600x900,  320*5x180*5
+    - WXGA:  1280x720,  320*4x180*4
+##### 4x3:
+    - ????
+##### Constants
+320*6*5*2, 180*6*5*2

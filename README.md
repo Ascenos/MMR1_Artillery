@@ -1,38 +1,31 @@
-# Tutorium 6
+# pyEngine
 
-Wir werden ein super tolles Spiel programmieren!
-> TODO
+Small Unity inspired Engine for some little projects
 
 ### Game Object hierarchy overview
 
 - GameObject
-> This is a base game Object
-
+        This is a base game Object
     - InputObject
-    > This object takes input and processes that
-
+            This object takes input and processes that
         - Tank
     - ParticleObject
-    > This is a small lived object for particles and smaller objects
-
+            This is a small lived object for particles and smaller objects
         - Projectile
         - ParticleEffects
     - RigidObjects
-    > Objects that rarely change, or do not need frequent update
-
+            Objects that rarely change, or do not need frequent update
         - Terrain
         - Background
-
 - GameFunction
-> These are used for independent functions from game objects.
-
+        These are used for independent functions from game objects.
     - mainGameFunction
     - some other stuff
 
 ---
 
 - GameBehavior
-> Coroutine to be executed with a GameObject to control it in 'parralel'
+        Coroutine to be executed with a GameObject to control it in 'parralel'
 
 
 ### Usage
@@ -45,14 +38,13 @@ You can either use the `engine.managed.loop` to get a self managed infinite
 loop, or you can manually call the update function
 
 ### Resolution considerations
-Optimization resolutions
 ##### 16x9:
-    - WXGA is included in QHD
-    - QHD:   2560x1440, 320*8x180*8
-    - FHD:   1920x1080, 320*6x180*6
-    - HD+:   1600x900,  320*5x180*5
-    - WXGA:  1280x720,  320*4x180*4
-##### 4x3:
-    - ????
+
+| Name | Resolution  | Factors         |
+|------|-------------|-----------------|
+| QHD  | 2560 x 1440 | 320\*8 x 180\*8 |
+| FHD  | 1920 x 1080 | 320\*6 x 180\*6 |
+| HD+  | 1600 x 900  | 320\*5 x 180\*5 |
+| WXGA | 1280 x 720  | 320\*4 x 180\*4 |
 ##### Constants
-320*6*5*2, 180*6*5*2
+320\*6\*5\*2, 180\*6\*5\*2

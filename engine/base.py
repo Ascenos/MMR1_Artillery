@@ -1,14 +1,14 @@
 from .renderer import BaseRenderer
 from .input import input_provider
+# Import the application settings
+import app
 
 
 
 class GameBehavior:
-    # TODO add *args instead if this (?)
-    def __init__(self, function, _temp_fix=None):
+    def __init__(self, function):
         try:
             self._iter_function = iter(function())
-        # TODO make explicit error catch
         except TypeError:
             raise ValueError('This cannot be a Behavior.') from None
         else:
@@ -54,7 +54,6 @@ class Engine:
         """
         Set up basic things
         """
-        self.renderer = BaseRenderer()
         self._game_objects = []
         self._game_behaviors = []
         self._input = None
@@ -113,7 +112,7 @@ class Engine:
             if id(game_object) == id(remove_object):
                 self._game_objects.remove(game_object)
                 # Cleanup for object
-                game_object.on_end()
+                game_object.on_destroy()
                 return
 
     def start_behavior(self, behavior):
@@ -122,13 +121,13 @@ class Engine:
         """
         self._game_behaviors.append(behavior)
 
-    def stop_behavior(self, remove_id):
+    def stop_behavior(self, remove):
         """
         Stops the first coroutine as same as the routine
         """
         for behavior in self._game_behaviors:
             # Check if their base functions are the same
-            if behavior.ID == remove_id:
+            if behavior.base_function == remove.behavior.base_function:
                 self._game_behaviors.remove(behavior)
                 return
 
@@ -152,8 +151,7 @@ class Engine:
                 # Coroutine was stopped normaly, continue
                 self.stop_behavior(behavior)
         # Let the renderer draw the Objects that are visible
-        # TODO add multiple renderers or additional capabilities
-        self.renderer.render(self._visibles())
+        app.renderer.render(self._visibles())
 
 # Use this singleton instance in the main project
 engine = Engine()

@@ -1,14 +1,16 @@
 from engine import *
 from .base import engine
 from time import time, sleep
-from game_functions.main import MainGameFunction
+import app
 
 
 
-# TODO implement singleton (?)
 class Managed:
-    def __init__(self):
+    def __init__(self, renderer):
+        # Do not start the loop at creation time
         self._updating = False
+        # Set needed renderer for engine here
+        engine.renderer = renderer
 
     def start(self):
         self._updating = True
@@ -17,6 +19,7 @@ class Managed:
         self._updating = False
 
     def loop(self, **kwargs):
+        # TODO make timer configuratable
         # TODO more functionality here
         update_time = kwargs.pop('deltaUpdate', 1/30)
 
@@ -40,11 +43,11 @@ class Managed:
             start_time = end_time + wait_time
             # Wait for next step
             sleep(wait_time)
+            # TODO remove log
             print('Update')
 
 # Start main function and add to engine.
-# Main functions need to be this specific class
-MainGameFunction()
+app.main_function()
 
 # Provide a simple api to allow easier calls
 _temp_managed = Managed()
